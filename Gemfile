@@ -79,3 +79,6 @@ gem 'devise-tailwinded'
 
 # for create the fake records to test the model
 gem 'faker'
+
+# A react inspired.., to make our components isolated and reusuable
+gem "view_component", require: "view_component/engine"

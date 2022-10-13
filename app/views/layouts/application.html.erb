@@ -15,8 +15,10 @@
   <body class="p-10">
     <%= render "layouts/messages"%>
     <% if current_user %>
-      <%= current_user.email %>
-      <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900' %>
+    <div class='flex justify-items-center align-center text-center'>
+      <div class='mr-5'><%= current_user.email %></div>
+      <div><%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900' %></div>
+    </div>
     <% end %>
     <%= yield %>
   </body>

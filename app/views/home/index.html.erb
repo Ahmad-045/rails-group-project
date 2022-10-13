@@ -25,7 +25,6 @@
   <thead>
     <tr>
       <th colspan='2'>Group name</th>
-      <%# <th>Actions</th> %>
     </tr>
   </thead>
   <tbody>
@@ -33,7 +32,7 @@
       <tr>
         <td><%= group.name %><td>
         <td><%= button_to 'leave Group', leave_group_path(group), class: 'ml-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2' %><td>
-        <td><%= link_to 'Group details', group_path(group), class: 'ml-2 focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 mr-2 mb-2' %><td>
+        <td><%= link_to 'Group details', group_path(group.id), class: 'ml-2 focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 mr-2 mb-2' %><td>
       <tr>
     <% end %>
   </tbody>

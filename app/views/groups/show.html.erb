@@ -9,11 +9,11 @@
 <p class='mt-2'><strong>Group Name: </strong><%= @group.name %></p>
 <p class='mt-2'><strong>Total Members: </strong><%= @group.users.count%></p>
 
-<h2>Posts</h2>
-<%= render 'groups/posts' %>
 
+<%= render 'groups/new_post' %>
 <hr>
 
 <div data-controller='posts'>
-  <%= render 'groups/all' %>
+  <%= render(PostComponent.with_collection(@group_posts, current_user: current_user)) %>
+  <%#= render 'groups/all_posts' %>
 </div>
