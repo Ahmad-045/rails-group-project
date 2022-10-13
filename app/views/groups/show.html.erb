@@ -1,0 +1,19 @@
+
+<div class='mt-3'>
+  <h2 class='text-2xl font-bold underline'>Group Details</h2>
+  <p class='float-right'>
+    <%#= link_to 'Create New Post', new_group_post_path(@group.id), class: 'ml-2 focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 mr-2 mb-2' %>
+  <p>
+  <div class='clear-both'></div>
+</div>
+<p class='mt-2'><strong>Group Name: </strong><%= @group.name %></p>
+<p class='mt-2'><strong>Total Members: </strong><%= @group.users.count%></p>
+
+<h2>Posts</h2>
+<%= render 'groups/posts' %>
+
+<hr>
+
+<div data-controller='posts'>
+  <%= render 'groups/all' %>
+</div>
