@@ -2,6 +2,11 @@ class PostsController <  ApplicationController
 
   before_action :set_user, :set_group, only: [:create]
 
+  def show
+    @post = Post.find_by id: params[:id], group_id: params[:group_id]
+    @post_comment = @post.comments.order(created_at: :desc)
+  end
+
   def create
     @post = Post.new set_post_params
     @user.posts << @post

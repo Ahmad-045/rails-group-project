@@ -13,7 +13,6 @@
 <%= render 'groups/new_post' %>
 <hr>
 
-<div data-controller='posts'>
+<div>
   <%= render(PostComponent.with_collection(@group_posts, current_user: current_user)) %>
-  <%#= render 'groups/all_posts' %>
 </div>

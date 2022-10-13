@@ -1,22 +1,6 @@
 <h2 class='m-3 bg-yellow-200 inline-block p-2 rounded-md'>All Groups</h2>
 
-<table class="table-auto">
-  <thead>
-    <tr>
-      <th>Group name</th>
-      <th>Total Members</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @all_groups.each do |group| %>
-      <tr>
-        <td><%= group.name %><td>
-        <td><%= group.users.count %><td>
-        <td><%= button_to 'Join', join_group_path(group), class: 'ml-2 focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 mr-2 mb-2' %><td>
-      <tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render(GroupComponent.with_collection(@all_groups)) %>
 
 <hr>
 <h2 class='m-3 bg-yellow-200 inline-block p-2 rounded-md'>My Groups</h2>
@@ -31,8 +15,8 @@
     <% @my_groups.each do |group| %>
       <tr>
         <td><%= group.name %><td>
-        <td><%= button_to 'leave Group', leave_group_path(group), class: 'ml-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2' %><td>
-        <td><%= link_to 'Group details', group_path(group.id), class: 'ml-2 focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 mr-2 mb-2' %><td>
+        <td><%= button_to 'leave Group', leave_group_path(group), class: 'focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2' %><td>
+        <td class='p-3'><%= link_to 'Group details', group_path(group.id), class: 'focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2' %><td>
       <tr>
     <% end %>
   </tbody>

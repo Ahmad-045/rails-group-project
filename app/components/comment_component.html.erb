@@ -1,0 +1,8 @@
+<div class="max-w-lg rounded overflow-hidden shadow-lg my-3" data-controller='posts'>
+  <div class="px-6 py-4">
+    <p class="text-gray-700 text-base"><%= @comment.content %></p>
+    <p class='text-sm text-gray-600'><strong class='text-black'>Posted: </strong><%= time_tag @comment.created_at, 'data-local':'time-ago'%></p>
+    <%= link_to 'REPLY', '#', class: 'inline-block cursor-pointer bg-blue-600 hover:bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2'%>
+  </div>
+</div>
+

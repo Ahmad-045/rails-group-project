@@ -1,0 +1,14 @@
+<div class="max-w-lg rounded overflow-hidden shadow-md my-3" data-controller='posts'>
+  <div class="px-6 py-4">
+    <div class="font-bold text-xl mb-2"><%= @group.name %></div>
+  </div>
+  <div class="px-6 pt-4 pb-2">
+    <div class = 'inline-block cursor-pointer bg-gray-300 hover:bg-blue-500 rounded-md px-3 py-1 text-sm font-semibold text-gray-500 mr-2 mb-2'>
+      <p>Members: <strong><%= @group.users.count %></strong><p>
+    </div>
+    <div class = 'inline-block cursor-pointer bg-gray-300 hover:bg-blue-500 rounded-md px-3 py-1 text-sm font-semibold text-gray-500 mr-2 mb-2'>
+      <p>Last Acticity: <strong>10 days ago</strong><p>
+    </div>
+    <%= link_to 'Join', join_group_path(@group), class: 'inline-block cursor-pointer bg-blue-600 hover:bg-blue-500 rounded-md px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 float-right'%>
+  </div>
+</div>
