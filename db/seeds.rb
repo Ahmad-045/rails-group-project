@@ -10,3 +10,8 @@
   user = User.new(email: Faker::Internet.email, password: 'asdasd')
   user.save!
 end
+
+5.times do |_i|
+  user = Group.new(name:Faker::Name.name)
+  user.save!
+end
