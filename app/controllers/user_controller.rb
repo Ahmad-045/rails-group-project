@@ -28,6 +28,18 @@ class UserController <  ApplicationController
     end
   end
 
+
+  def exit_group
+    group = Group.find_by(id: params[:id])
+    group_exists = current_user.groups.find_by(id: params[:id])
+
+    if current_user.groups.delete(group_exists)
+      redirect_to request.referer || root_path, alert: 'Successfully.., REMOVED from the Group'
+    else
+      redirect_to request.referer || root_path, notice: 'Errorrr!!!!'
+    end
+  end
+
   private
 
   def set_user

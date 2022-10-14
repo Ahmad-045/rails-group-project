@@ -10,4 +10,8 @@ class PostPolicy < ApplicationPolicy
     @user.groups.exists?(@record.group_id)
   end
 
+  def destroy?
+    !@record.user.id.eql?@user.id
+  end
+
 end

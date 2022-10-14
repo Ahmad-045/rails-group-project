@@ -4,9 +4,8 @@ export default class extends Controller {
   static targets = ['modal', 'title', 'allGroups', 'joinedGroups', 'myGroups'];
 
   connect() {
-    this.titleTarget.value = '';
+    console.log(this.titleTarget);
   }
-
   showModal() {
     this.modalTarget.classList.remove('hidden');
   }

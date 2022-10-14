@@ -21,6 +21,17 @@ class GroupsController < ApplicationController
     end
   end
 
+  def destroy
+    group = Group.find_by(id: params[:id])
+    authorize group
+
+    if group.destroy
+      redirect_to request.referer || root_path, notice: 'Successfully deleted the Group'
+    else
+      redirect_to request.referer || root_path, alert: 'Error deleting the Group'
+    end
+  end
+
   private
 
   def set_group_params

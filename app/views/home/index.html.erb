@@ -1,42 +1,7 @@
 
 <div data-controller='home'>
-  <div data-home-target='modal' class="relative z-10 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-    <div class="fixed inset-0 z-10 overflow-y-auto">
-      <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-        <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div class="sm:flex sm:items-start">
-              <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z" />
-                </svg>
-              </div>
-              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <div class="mt-2">
-                  <p class="text-sm text-gray-500">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur,</p>
-                </div>
 
-                <%= form_with(model: Group.new, :url => groups_path, local: true) do |f| %>
-                  <div class="mt-2">
-                    <%= f.label :name %>
-                    <%= f.text_field :name, data: {target: 'home.title'} , placeholder: 'Name of the Group', class: 'mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1'%>
-                  </div>
-
-                  <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <button type="button" data-action='click->home#closeModal' class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Cancel</button>
-                    <%= f.submit "Create New Group", class: "inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm" %>
-                  </div>
-                <% end %>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render 'UI/modal'%>
 
   <button data-action='click->home#showModal' class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
     Create New Group
@@ -48,33 +13,37 @@
     <button data-action='home#myGroups' class='cursor-pointer m-3 bg-yellow-400 hover:bg-yellow-300 inline-block p-2 rounded-md'>Created by Me</button>
   </div>
   <div data-home-target='allGroups'>
-    <%= render(GroupComponent.with_collection(@all_groups)) %>
+    <%= render(GroupComponent.with_collection(@all_groups, user: current_user)) %>
   </div>
   <hr>
 
-  <div data-home-target='joinedGroups' class='hidden'>
-    <table class="table-auto">
-      <thead>
-        <tr>
-          <th colspan='2'>Group name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @my_groups.each do |group| %>
+  <div data-home-target='joinedGroups' class="overflow-x-auto relative hidden">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <td><%= group.name %><td>
-            <td><%#= button_to 'leave Group', leave_group_path(group) ,class: 'focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2' %><td>
-            <td class='p-3'><%= link_to 'Group details', group_path(group.id), class: 'focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2' %><td>
-          <tr>
-        <% end %>
-      </tbody>
+            <th scope="col" class="py-3 px-6">Group name</th>
+            <th scope="col" class="py-3 px-6">Total Posts</th>
+            <th scope="col" class="py-3 px-6">Total Members</th>
+            <th colspan='2' class="py-3 px-6 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @my_groups.each do |group| %>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"><%= group.name %></th>
+              <td class="py-4 px-6"><%= group.posts.count%></td>
+              <td class="py-4 px-6"><%= group.users.count%></td>
+              <td class="py-4 px-6"><%= link_to 'Group details', group_path(group.id), class: 'focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2' %></td>
+              <td class="py-4 px-6"><%= button_to 'Exit Group', exit_group_path(group.id), data: {confirm: 'Are you Sure!'}, class: 'focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2' %></td>
+            </tr>
+          <% end %>
+        </tbody>
     </table>
   </div>
 
-
   <hr>
   <div data-home-target='myGroups' class='hidden'>
-    <%= render(GroupComponent.with_collection(@created_by_me)) %>
+    <%= render(GroupComponent.with_collection(@created_by_me, user: current_user)) %>
   </div>
 
 

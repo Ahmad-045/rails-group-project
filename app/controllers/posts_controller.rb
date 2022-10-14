@@ -33,6 +33,7 @@ class PostsController <  ApplicationController
 
   def destroy
     @post = Post.find_by(id: params[:id], group_id: params[:group_id])
+    authorize @post
     if @post.destroy
       redirect_to request.referer || root_path, notice: 'Post Deleted Sucessfully'
     else

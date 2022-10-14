@@ -4,11 +4,14 @@ class GroupPolicy < ApplicationPolicy
     def resolve
       scope.all
     end
-
   end
 
   def show?
     @record.users.exists?(@user.id)
+  end
+
+  def destroy?
+    @record.user_id.eql?(@user.id)
   end
 
   def leave_group?
