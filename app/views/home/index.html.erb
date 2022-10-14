@@ -1,4 +1,3 @@
-<h2 class='m-3 bg-yellow-200 inline-block p-2 rounded-md'>All Groups</h2>
 
 <div data-controller='home'>
   <div data-home-target='modal' class="relative z-10 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -42,32 +41,41 @@
   <button data-action='click->home#showModal' class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
     Create New Group
   </button>
+
+  <div class='mt-5'>
+    <button data-action='home#allGroups' class='cursor-pointer m-3 bg-yellow-400 hover:bg-yellow-300 inline-block p-2 rounded-md'>All Groups</button>
+    <button data-action='home#joinedGroups' class='cursor-pointer m-3 bg-yellow-400 hover:bg-yellow-300 inline-block p-2 rounded-md'>My Groups</button>
+    <button data-action='home#myGroups' class='cursor-pointer m-3 bg-yellow-400 hover:bg-yellow-300 inline-block p-2 rounded-md'>Created by Me</button>
+  </div>
+  <div data-home-target='allGroups'>
+    <%= render(GroupComponent.with_collection(@all_groups)) %>
+  </div>
+  <hr>
+
+  <div data-home-target='joinedGroups' class='hidden'>
+    <table class="table-auto">
+      <thead>
+        <tr>
+          <th colspan='2'>Group name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @my_groups.each do |group| %>
+          <tr>
+            <td><%= group.name %><td>
+            <td><%= button_to 'leave Group', leave_group_path(group) ,class: 'focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2' %><td>
+            <td class='p-3'><%= link_to 'Group details', group_path(group.id), class: 'focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2' %><td>
+          <tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+
+  <hr>
+  <div data-home-target='myGroups' class='hidden'>
+    <%= render(GroupComponent.with_collection(@created_by_me)) %>
+  </div>
+
+
 </div>
-
-<%= render(GroupComponent.with_collection(@all_groups)) %>
-
-<hr>
-<h2 class='m-3 bg-yellow-200 inline-block p-2 rounded-md'>My Groups</h2>
-
-<table class="table-auto">
-  <thead>
-    <tr>
-      <th colspan='2'>Group name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @my_groups.each do |group| %>
-      <tr>
-        <td><%= group.name %><td>
-        <td><%= button_to 'leave Group', leave_group_path(group) ,class: 'focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2' %><td>
-        <td class='p-3'><%= link_to 'Group details', group_path(group.id), class: 'focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2' %><td>
-      <tr>
-    <% end %>
-  </tbody>
-</table>
-
-
-<hr>
-<h2 class='m-3 bg-yellow-200 inline-block p-2 rounded-md'>Created by Me</h2>
-
-<%= render(GroupComponent.with_collection(@created_by_me)) %>
