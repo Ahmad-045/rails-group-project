@@ -1,13 +1,17 @@
 class CommentsController < ApplicationController
 
-  before_action :set_post
-
   def index
 
   end
 
+  def new
+    # @post = Post.find(params[:post_id])
+    # @comment = @post.comments.new(parent_id: params[:parent_id])
+  end
+
   def create
-    @comment = @post.comments.new set_comment_params
+    @post = Post.find_by(id: params[:post_id])
+    @comment = @post.comments.new set_comment_params.merge(parent_id: params[:parent_id])
     if @comment.save
       redirect_to request.referer || root_path, notice: 'Successfully Added Comment'
     else
@@ -18,10 +22,6 @@ class CommentsController < ApplicationController
   private
   def set_comment_params
     params.require(:comment).permit(:content);
-  end
-
-  def set_post
-    @post = Post.find_by(id: params[:post_id])
   end
 
 end

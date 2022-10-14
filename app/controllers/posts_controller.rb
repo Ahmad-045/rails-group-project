@@ -7,6 +7,12 @@ class PostsController <  ApplicationController
     @post_comment = @post.comments.order(created_at: :desc)
   end
 
+  def update
+    post = Post.find_by(id: params[:id])
+    post.update set_post_params
+    redirect_to request.referer || root_path, notice: 'Successfully Updated the posts'
+  end
+
   def create
     @post = Post.new set_post_params
     @user.posts << @post

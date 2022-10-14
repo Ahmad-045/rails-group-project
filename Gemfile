@@ -88,3 +88,6 @@ gem "view_component", require: "view_component/engine"
 
 # Gem for storing the credentials
 gem 'figaro'
+
+# To make the Application work with the Ajax Requests
+gem 'jquery-rails'

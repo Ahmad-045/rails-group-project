@@ -10,7 +10,18 @@
 <p class='mt-2'><strong>Total Members: </strong><%= @group.users.count%></p>
 
 
-<%= render 'groups/new_post' %>
+<div class='grid grid-cols-4 mb-2 gap-4'>
+  <div class='col-span-3' ><%= render 'groups/new_post' %></div>
+  <div>
+    <p>Members</p>
+    <div class='grid grid-cols-12'>
+      <% @group_members.each do |member| %>
+        <div class='inline-block col-span-11'><%= member.email %> </div>
+        <%= button_to 'x', leave_group_path(@group, user_id: member),class:'bg-red-600 text-white w-5 h-5 flex justify-center items-center' %>
+      <% end %>
+    </div>
+  </div>
+</div>
 <hr>
 
 <div>
