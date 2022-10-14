@@ -13,10 +13,15 @@ class UserController <  ApplicationController
 
 
   def leave_group
-    user = User.find_by(id: params[:user_id])
-    group = user.groups.find_by(id: params[:id])
+    group = Group.find_by(id: params[:id])
+    authorize group
 
-    if user.groups.delete(group)
+    user = User.find_by(id: params[:user_id])
+    authorize user
+
+    group_exists = user.groups.find_by(id: params[:id])
+
+    if user.groups.delete(group_exists)
       redirect_to request.referer || root_path, alert: 'Successfully.., REMOVED from the Group'
     else
       redirect_to request.referer || root_path, notice: 'Errorrr!!!!'

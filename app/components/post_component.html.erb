@@ -3,6 +3,10 @@
     <div data-posts-target='post'>
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2" data-posts-target='title' ><%= @post.title %></div>
+            <div class='my-5'>
+              <p class='text-sm text-gray-600'><strong class='text-black'>Created By: </strong><%= @post.user.email %></p>
+              <p class='text-sm text-gray-600'><strong class='text-black'>Posted: </strong><%= time_tag @post.created_at, 'data-local':'time-ago'%></p>
+            </div>
         <p class="text-gray-700 text-base" data-posts-target='content'><%= @post.content %></p>
       </div>
       <div class="px-6 pt-4 pb-2">

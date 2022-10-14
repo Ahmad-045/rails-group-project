@@ -4,7 +4,13 @@ class PostsController <  ApplicationController
 
   def show
     @post = Post.find_by id: params[:id], group_id: params[:group_id]
-    @post_comment = @post.comments.order(created_at: :desc)
+    if @post
+      authorize @post
+      @post_comment = @post.comments.order(created_at: :desc)
+
+    else
+      redirect_to request.referer || root_path, alert: 'Resource Not Found'
+    end
   end
 
   def update

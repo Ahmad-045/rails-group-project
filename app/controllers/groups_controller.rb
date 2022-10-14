@@ -2,8 +2,14 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find_by(id: params[:id])
-    @group_posts = @group.posts.order(created_at: :desc)
-    @group_members = @group.users
+
+    if @group
+      authorize @group
+      @group_posts = @group.posts.order(created_at: :desc)
+      @group_members = @group.users
+    else
+      redirect_to request.referer || root_path, alert: 'Resource Not Found'
+    end
   end
 
   def create
@@ -11,7 +17,7 @@ class GroupsController < ApplicationController
     if group.save
       redirect_to request.referer || root_path, notice: 'Successfully created the new Group'
     else
-      redirect_to request.referer || root_path, notice: 'Erro Creating the Group'
+      redirect_to request.referer || root_path, alert: 'Erro Creating the Group'
     end
   end
 

@@ -91,3 +91,5 @@ gem 'figaro'
 
 # To make the Application work with the Ajax Requests
 gem 'jquery-rails'
+
+gem "pundit", "~> 2.2"
