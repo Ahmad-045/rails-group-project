@@ -1,6 +1,12 @@
 class GroupsController < ApplicationController
 
   before_action :set_group, except: [:create]
+
+
+  def index
+    @all_groups = Group.all
+  end
+
   def show
     if @group
       authorize @group
@@ -20,6 +26,11 @@ class GroupsController < ApplicationController
     end
   end
 
+  def update
+    @group.update set_group_params
+    redirect_to request.referer || root_path, notice: 'Successfully Updated the Group'
+  end
+
   def destroy
     authorize @group
 
@@ -30,10 +41,10 @@ class GroupsController < ApplicationController
     end
   end
 
-  def update
-    @group.update set_group_params
-    redirect_to request.referer || root_path, notice: 'Successfully Updated the Comment'
+  def created_by_me
+    @created_by_me = Group.where('user_id = ?', current_user.id)
   end
+
 
   private
 

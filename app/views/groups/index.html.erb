@@ -1,0 +1,5 @@
+<%= render 'UI/nav_buttons', allGroup: true %>
+<div>
+  <%# <h2>All Groups</h2> %>
+  <%= render(GroupComponent.with_collection(@all_groups, user: current_user)) %>
+</div>

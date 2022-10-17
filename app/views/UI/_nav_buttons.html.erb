@@ -1,0 +1,9 @@
+<button data-action='click->home#showModal' class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+  Create New Group
+</button>
+
+<div class='mt-5' data-home-target='buttons'>
+  <%= link_to 'All Groups', groups_path, class:"cursor-pointer m-3 border-b-2 border-white hover:border-b-2 hover:border-blue-500 inline-block p-2 px-3 #{ defined?(allGroup) ? 'border-blue-500' : 'border-white'} "%>
+  <%= link_to 'My Groups', root_path, data: {action: 'joinedGroups', turbo: false}, class:"cursor-pointer m-3 border-b-2 border-white hover:border-b-2 hover:border-blue-500 inline-block p-2 px-3 #{ defined?(myGroup) ? 'border-blue-500' : 'border-white'} "%>
+  <%= link_to 'Created By Me', created_by_me_path, data: {action: 'myGroups'}, class:"cursor-pointer m-3 border-b-2 border-white hover:border-b-2 hover:border-blue-500 inline-block p-2 px-3 #{defined?(createdByMe) ? 'border-blue-500' : 'border-white'}"%>
+</div>

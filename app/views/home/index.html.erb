@@ -1,20 +1,7 @@
 
 <div data-controller='home'>
   <%= render partial: 'UI/modal', locals: {group: Group.new} %>
-
-  <button data-action='click->home#showModal' class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-    Create New Group
-  </button>
-
-  <div class='mt-5' data-home-target='buttons'>
-    <button data-action='home#joinedGroups' class='cursor-pointer m-3 bg-yellow-400 hover:bg-yellow-300 inline-block p-2 rounded-md px-3 '>My Groups</button>
-    <button data-action='home#allGroups' class='cursor-pointer m-3 bg-yellow-400 hover:bg-yellow-300 inline-block p-2 rounded-md px-3'>All Groups</button>
-    <button data-action='home#myGroups' class='cursor-pointer m-3 bg-yellow-400 hover:bg-yellow-300 inline-block p-2 rounded-md px-3'>Created by Me</button>
-  </div>
-  <div data-home-target='allGroups' class='hidden'>
-    <%= render(GroupComponent.with_collection(@all_groups, user: current_user)) %>
-  </div>
-  <hr>
+  <%= render 'UI/nav_buttons', myGroup: true %>
 
   <div data-home-target='joinedGroups' class="overflow-x-auto relative">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -41,9 +28,5 @@
   </div>
 
   <hr>
-  <div data-home-target='myGroups' class='hidden'>
-    <%= render(GroupComponent.with_collection(@created_by_me, user: current_user)) %>
-  </div>
-
 
 </div>
