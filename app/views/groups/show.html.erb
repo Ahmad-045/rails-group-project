@@ -17,7 +17,7 @@
 
 <div class='grid grid-cols-4 mb-2 gap-4'>
   <div class='col-span-3' >
-    <%= render partial: 'groups/new_post', locals: {group: @group, post: @group.posts.build} %>
+    <%= render partial: 'groups/new_post', locals: {group: @group, post: @group.posts.build, submit_label: 'Create New Post'} %>
   </div>
   <div>
     <strong>Members</strong>
