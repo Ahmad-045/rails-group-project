@@ -1,14 +1,5 @@
 class CommentsController < ApplicationController
 
-  def index
-
-  end
-
-  def new
-    # @post = Post.find(params[:post_id])
-    # @comment = @post.comments.new(parent_id: params[:parent_id])
-  end
-
   def create
     @post = Post.find_by(id: params[:post_id])
     @comment = @post.comments.new set_comment_params.merge(parent_id: params[:parent_id], user_id: current_user.id)

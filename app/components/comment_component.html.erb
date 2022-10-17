@@ -31,13 +31,24 @@
     </div>
     <% if @comment.replies.any? %>
       <% @comment.replies.each do |reply| %>
-        <div class='ml-10'>
-          <div class="max-w-lg rounded overflow-hidden my-3">
-            <div class="px-6 py-4">
-              <p class="text-gray-700 text-base"><%= reply.content %></p>
-              <p class='text-sm text-gray-600'><strong class='text-black'>Posted: </strong><%= time_tag reply.created_at, 'data-local':'time-ago'%></p>
+        <div class='ml-10 mb-3' data-controller='comment'>
+          <div data-comment-target='comment' >
+            <div class="max-w-lg rounded overflow-hidden my-3">
+              <div class="px-6 py-4">
+                <p class="text-gray-700 text-base" data-comment-target='commentContent'><%= reply.content %></p>
+                <p class='text-sm text-gray-600'><strong class='text-black'>Posted: </strong><%= time_tag reply.created_at, 'data-local':'time-ago'%></p>
+              </div>
+            </div>
+            <div class='ml-5'>
+              <% if (@comment.user_id === @user.id || @post.group.user_id === @user.id) %>
+                <div class='mt-2'>
+                  <%= link_to 'EDIT', '#' , data: { action: "comment#edit", turbo: false }, class: 'inline-block cursor-pointer bg-blue-600 hover:bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2' %>
+                  <%= link_to 'DELETE', post_comment_path(@comment.post_id, reply.id), data: { "turbo-method": :delete }, class: 'inline-block cursor-pointer bg-red-600 hover:bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2' %>
+                </div>
+              <% end %>
             </div>
           </div>
+          <%= render partial: 'comment/editForm', locals: {comment: reply}%>
         </div>
       <% end %>
     <% end %>
