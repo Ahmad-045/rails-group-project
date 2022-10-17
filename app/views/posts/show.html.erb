@@ -27,6 +27,6 @@
   </div>
 
   <div class='mt-5'>
-    <%= render(CommentComponent.with_collection(@post_comment, post: @post)) %>
+    <%= render(CommentComponent.with_collection(@post_comment, post: @post, user: current_user)) %>
   </div>
 </div>
