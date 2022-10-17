@@ -4,6 +4,7 @@
 //= require jquery_ujs
 import '@hotwired/turbo-rails';
 import 'controllers';
+import '@fortawesome/fontawesome-free';
 
 import LocalTime from 'local-time';
 LocalTime.start();
