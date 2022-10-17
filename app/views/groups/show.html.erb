@@ -9,7 +9,7 @@
 <div class='grid grid-cols-4 mb-2 gap-4'>
   <div class='col-span-3' ><%= render 'groups/new_post' %></div>
   <div>
-    <p>Members</p>
+    <strong>Members</strong>
     <div class='grid grid-cols-12'>
       <% @group_members.each do |member| %>
         <div class='inline-block col-span-11'><%= member.email %> </div>

@@ -12,8 +12,8 @@
     </div>
     <div class='flex float-right justify-center items-center gap-2 mb-3'>
       <%= link_to 'Delete', group_path(@group), data: { "turbo-method": :delete }, class: 'focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2 px-4' if Pundit.policy(@user, @group).destroy? %>
-      <%= button_to 'Join', join_group_path(@group), class: 'focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 px-4'%>
+      <%= button_to 'Join', join_group_path(@group), class: 'focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 px-4' if helpers.group_members?(@group)%>
+      <%= button_to 'Already Joined', {}, class: 'focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 px-4 opacity-50 cursor-not-allowed' unless helpers.group_members?(@group)%>
     </div>
-
   </div>
 </div>
