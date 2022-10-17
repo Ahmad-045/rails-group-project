@@ -17,6 +17,9 @@
         <% end %>
       </div>
     </div>
-    <%= render partial: 'posts/editForm', locals: {post: @post}%>
+    <div data-posts-target='editForm' class='hidden'>
+      <%= render partial: 'groups/new_post', locals: {group: @group, post: @post} %>
+    </div>
+    <%#= render partial: 'posts/editForm', locals: {post: @post}%>
   </div>
 </div>

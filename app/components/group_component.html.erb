@@ -1,7 +1,7 @@
 
 <div class="max-w-lg rounded overflow-hidden shadow-md my-3 " data-controller='posts'>
   <div class="px-6 py-4">
-    <div class="font-bold text-xl mb-2"><%= @group.name %></div>
+    <div><%= link_to @group.name, group_path(@group.id), class: 'font-bold text-lg mb-2' %></div>
     <p class='text-sm text-gray-600'><strong class='text-black'>Created at:&nbsp;&nbsp;</strong> <%= time_tag @group.created_at, 'data-local':'time-ago'%></p>
     <p class='text-sm text-gray-600'><strong class='text-black'>Created by:&nbsp;&nbsp;</strong> <%= helpers.usertest(@group)%></p>
   </div>
@@ -14,7 +14,7 @@
     <div class='flex float-right justify-center items-center gap-2 mb-3'>
       <%= link_to 'Delete', group_path(@group), data: { "turbo-method": :delete }, class: 'focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2 px-4' if Pundit.policy(@user, @group).destroy? %>
       <%= button_to 'Join', join_group_path(@group), class: 'focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 px-4' unless @group.users.find_by(id: @user.id)%>
-      <%= button_to 'Already Joined', {}, class: 'focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 px-4 opacity-50 cursor-not-allowed' if @group.users.find_by(id: @user.id)%>
+      <%= button_to 'Joined', {}, class: 'focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 px-4 opacity-50 cursor-not-allowed' if @group.users.find_by(id: @user.id)%>
     </div>
   </div>
 </div>

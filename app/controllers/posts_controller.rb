@@ -7,7 +7,6 @@ class PostsController <  ApplicationController
     if @post
       authorize @post
       @post_comment = @post.comments.order(created_at: :desc)
-
     else
       redirect_to request.referer || root_path, alert: 'Resource Not Found'
     end
@@ -16,13 +15,14 @@ class PostsController <  ApplicationController
   def update
     post = Post.find_by(id: params[:id])
     post.update set_post_params
-    redirect_to request.referer || root_path, notice: 'Successfully Updated the posts'
+    # redirect_to request.referer || root_path, notice: 'Successfully Updated the posts'
+    redirect_to request.referer, notice: 'Successfully Updated the posts'
   end
 
   def create
-    @post = Post.new set_post_params
-    @user.posts << @post
-    @group.posts << @post
+    @group = Group.find(params[:group_id])
+    @post = @group.posts.create set_post_params
+    @post.user = current_user
 
     if @post.save
       redirect_to request.referer || root_path, notice: 'Successfully created the new posts'

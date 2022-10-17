@@ -6,17 +6,17 @@
     Create New Group
   </button>
 
-  <div class='mt-5'>
+  <div class='mt-5' data-home-target='buttons'>
+    <button data-action='home#joinedGroups' class='cursor-pointer m-3 bg-yellow-400 hover:bg-yellow-300 inline-block p-2 rounded-md px-3 '>My Groups</button>
     <button data-action='home#allGroups' class='cursor-pointer m-3 bg-yellow-400 hover:bg-yellow-300 inline-block p-2 rounded-md px-3'>All Groups</button>
-    <button data-action='home#joinedGroups' class='cursor-pointer m-3 bg-yellow-400 hover:bg-yellow-300 inline-block p-2 rounded-md px-3'>My Groups</button>
     <button data-action='home#myGroups' class='cursor-pointer m-3 bg-yellow-400 hover:bg-yellow-300 inline-block p-2 rounded-md px-3'>Created by Me</button>
   </div>
-  <div data-home-target='allGroups'>
+  <div data-home-target='allGroups' class='hidden'>
     <%= render(GroupComponent.with_collection(@all_groups, user: current_user)) %>
   </div>
   <hr>
 
-  <div data-home-target='joinedGroups' class="overflow-x-auto relative hidden">
+  <div data-home-target='joinedGroups' class="overflow-x-auto relative">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>

@@ -16,14 +16,15 @@
 <p class='mt-2'><strong>Total Members: </strong><%= @group.users.count%></p>
 
 <div class='grid grid-cols-4 mb-2 gap-4'>
-  <div class='col-span-3' ><%= render 'groups/new_post' %></div>
+  <div class='col-span-3' >
+    <%= render partial: 'groups/new_post', locals: {group: @group, post: @group.posts.build} %>
+  </div>
   <div>
     <strong>Members</strong>
     <div class='grid grid-cols-12'>
       <% @group_members.each do |member| %>
         <div class='inline-block col-span-11'><%= member.email %> </div>
-
-        <%= button_to 'x', leave_group_path(@group, user_id: member),class:'text-red-800 w-5 h-5 flex justify-center items-center' if !@group.user_id.eql?(member.id)%>
+        <%= button_to 'x', leave_group_path(@group, user_id: member),class:'text-white bg-red-500 w-5 h-5 flex justify-center items-center' if !@group.user_id.eql?(member.id)%>
       <% end %>
     </div>
   </div>
