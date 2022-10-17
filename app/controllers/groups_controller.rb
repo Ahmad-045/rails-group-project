@@ -1,8 +1,7 @@
 class GroupsController < ApplicationController
 
+  before_action :set_group, except: [:create]
   def show
-    @group = Group.find_by(id: params[:id])
-
     if @group
       authorize @group
       @group_posts = @group.posts.order(created_at: :desc)
@@ -22,20 +21,28 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    group = Group.find_by(id: params[:id])
-    authorize group
+    authorize @group
 
-    if group.destroy
+    if @group.destroy
       redirect_to request.referer || root_path, notice: 'Successfully deleted the Group'
     else
       redirect_to request.referer || root_path, alert: 'Error deleting the Group'
     end
   end
 
+  def update
+    @group.update set_group_params
+    redirect_to request.referer || root_path, notice: 'Successfully Updated the Comment'
+  end
+
   private
 
   def set_group_params
     params.require(:group).permit(:name)
+  end
+
+  def set_group
+    @group = Group.find_by(id: params[:id])
   end
 
 end

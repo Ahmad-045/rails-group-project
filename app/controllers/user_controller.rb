@@ -28,7 +28,6 @@ class UserController <  ApplicationController
     end
   end
 
-
   def exit_group
     group = Group.find_by(id: params[:id])
     group_exists = current_user.groups.find_by(id: params[:id])
