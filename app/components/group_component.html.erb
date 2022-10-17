@@ -3,6 +3,7 @@
   <div class="px-6 py-4">
     <div class="font-bold text-xl mb-2"><%= @group.name %></div>
     <p class='text-sm text-gray-600'><strong class='text-black'>Created at:&nbsp;&nbsp;</strong> <%= time_tag @group.created_at, 'data-local':'time-ago'%></p>
+    <p class='text-sm text-gray-600'><strong class='text-black'>Created by:&nbsp;&nbsp;</strong> <%= helpers.usertest(@group)%></p>
   </div>
   <div class="px-6 pb-2">
     <div class='flex gap-1'>

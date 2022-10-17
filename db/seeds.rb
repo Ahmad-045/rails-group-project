@@ -12,6 +12,6 @@
 end
 
 5.times do |_i|
-  user = Group.new(name:Faker::Name.name)
+  user = Group.new(name:Faker::Name.name, user_id: Faker::Number.within(range: 1..5) )
   user.save!
 end
