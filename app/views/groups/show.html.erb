@@ -3,9 +3,11 @@
   <div class='col-span-3'>
     <div class='flex justify-between'>
       <h2 class='text-2xl font-bold underline'>Group Details</h2>
-      <button data-action='click->home#showModal' class="float-right text-white font-bold py-2 px-4 rounded">
-        <i class="fa-solid fa-gear text-2xl text-green-500"></i>
-      </button>
+      <% if @group.user_id === current_user.id %>
+        <button data-action='click->home#showModal' class="float-right text-white font-bold py-2 px-4 rounded">
+          <i class="fa-solid fa-gear text-2xl text-green-500"></i>
+        </button>
+      <% end %>
     </div>
     <%= render partial: 'UI/modal', locals: {group: @group} %>
   </div>

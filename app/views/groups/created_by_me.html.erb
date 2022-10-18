@@ -1,5 +1,8 @@
-<%= render 'UI/nav_buttons', createdByMe: true%>
-<div>
-  <%# <h2>Created By me</h2> %>
-  <%= render(GroupComponent.with_collection(@created_by_me, user: current_user)) %>
+<div data-controller='home'>
+  <%= render partial: 'UI/modal', locals: {group: Group.new} %>
+  <%= render 'UI/nav_buttons', createdByMe: true%>
+  <div>
+    <%# <h2>Created By me</h2> %>
+    <%= render(GroupComponent.with_collection(@created_by_me, user: current_user)) %>
+  </div>
 </div>

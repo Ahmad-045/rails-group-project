@@ -7,6 +7,7 @@ export default class extends Controller {
   edit(e) {
     e.preventDefault();
     e.stopPropagation();
+
     this.postTarget.classList.add('hidden');
     this.editFormTarget.classList.remove('hidden');
   }
