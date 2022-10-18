@@ -15,8 +15,7 @@ class PostsController <  ApplicationController
   def update
     post = Post.find_by(id: params[:id])
     post.update set_post_params
-    # redirect_to request.referer || root_path, notice: 'Successfully Updated the posts'
-    redirect_to request.referer, notice: 'Successfully Updated the posts'
+    redirect_to request.referer || root_path, notice: 'Successfully Updated the posts'
   end
 
   def create

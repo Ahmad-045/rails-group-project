@@ -11,4 +11,10 @@ export default class extends Controller {
     this.postTarget.classList.add('hidden');
     this.editFormTarget.classList.remove('hidden');
   }
+
+  save(e) {
+    console.log(e);
+    this.postTarget.classList.remove('hidden');
+    this.editFormTarget.classList.add('hidden');
+  }
 }

@@ -3,16 +3,16 @@
     <div data-posts-target='post'>
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2" data-posts-target='title' ><%= @post.title %></div>
-            <div class='my-5'>
-              <p class='text-sm text-gray-600'><strong class='text-black'>Created By: </strong><%= @post.user.email %></p>
-              <p class='text-sm text-gray-600'><strong class='text-black'>Posted: </strong><%= time_tag @post.created_at, 'data-local':'time-ago'%></p>
-            </div>
+          <div class='my-5'>
+            <p class='text-sm text-gray-600'><strong class='text-black'>Created By: </strong><%= @post.user.email %></p>
+            <p class='text-sm text-gray-600'><strong class='text-black'>Posted: </strong><%= time_tag @post.created_at, 'data-local':'time-ago'%></p>
+          </div>
         <p class="text-gray-700 text-base" data-posts-target='content'><%= @post.content %></p>
       </div>
       <div class="px-6 pt-4 pb-2">
         <%= link_to 'Show Post', group_post_path(@post.group, @post), class: 'inline-block cursor-pointer bg-blue-600 hover:bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2'%>
         <% if (@post.user_id === @current_user.id || @group.user_id === @current_user.id) %>
-          <%= link_to 'EDIT', '#' , data: { action: "posts#edit", turbo: false }, class: 'inline-block cursor-pointer bg-blue-600 hover:bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2' %>
+          <%= link_to 'EDIT', '#' , data: { action: "posts#edit" }, class: 'inline-block cursor-pointer bg-blue-600 hover:bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2' %>
           <%= link_to 'DELETE', group_post_path(@post.group, @post.id), data: { "turbo-method": :delete }, class: 'inline-block cursor-pointer bg-red-600 hover:bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2' %>
         <% end %>
       </div>

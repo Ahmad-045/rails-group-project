@@ -1,8 +1,9 @@
 <div data-controller='home'>
   <%= render partial: 'UI/modal', locals: {group: Group.new} %>
   <%= render 'UI/nav_buttons', createdByMe: true%>
-  <div>
-    <%# <h2>Created By me</h2> %>
+  <% if @created_by_me.length!=0 %>
     <%= render(GroupComponent.with_collection(@created_by_me, user: current_user)) %>
-  </div>
+  <% else %>
+    <h1 class='text-center shadow-sm inline-block mt-3 p-2'>No Group Created by You<h1>
+  <% end %>
 </div>
