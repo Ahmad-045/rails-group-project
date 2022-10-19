@@ -1,7 +1,7 @@
 <div class=''>
   <div class='shadow-md p-10'>
     <div>
-      <%= form_for [group, post] do |f| %>
+      <%= form_for [group, post], remote: true ,data:{action: 'ajax:success->posts#save'} do |f| %>
 
         <div class="mt-2">
           <%= f.label :title %>
