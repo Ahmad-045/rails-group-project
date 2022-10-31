@@ -1,57 +1,10 @@
-
-<% unless @comment.parent_id %>
-  <div class="max-w-lg rounded overflow-hidden shadow-lg my-3" data-controller='comment'>
-    <div class="px-6 py-4">
-      <div data-comment-target='comment'>
-        <p class="text-gray-700 text-base" data-comment-target='commentContent'><%= @comment.content %></p>
-        <p class='text-sm text-gray-600'><strong class='text-black'>Posted: </strong><%= time_tag @comment.created_at, 'data-local':'time-ago'%></p>
-        <% if (@comment.user_id === @user.id || @post.group.user_id === @user.id) %>
-          <div class='mt-2'>
-            <%= link_to 'EDIT', '#' , data: { action: "comment#edit", turbo: false }, class: 'inline-block cursor-pointer text-blue-600 hover:text-blue-500 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2' %>
-            <%= link_to 'DELETE', post_comment_path(@comment.post_id, @comment.id), data: { "turbo-method": :delete }, class: 'inline-block cursor-pointer text-red-600 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2' %>
-          </div>
-        <% end %>
-      </div>
-      <%= render partial: 'comment/editForm', locals: {comment: @comment}%>
-      <div class='mt-10'>
-        <div class="max-w-lg">
-          <div class='w-full'>
-            <%= form_with(model: Comment.new, url: post_comments_path(@post, parent_id: @comment)) do |f| %>
-              <%= f.hidden_field :parent_id %>
-              <div class="mt-2">
-                <%= f.text_field :content, autofocus: true, placeholder: 'Add a Comment', class: 'mt-1 px-3 py-2 bg-white border-b-2 shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1'%>
-              </div>
-              <div class="actions mt-2 float-right">
-                <%= f.submit "Reply", class: "inline-block cursor-pointer bg-blue-600 hover:bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2" %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
+<div id="<%= "#{dom_id(@comment)}_comment"%>" >
+  <p class="text-gray-700 text-base"><%= @comment.content %></p>
+  <p class='text-sm text-gray-600'><strong class='text-black'>Posted: </strong><%= time_tag @comment.created_at, 'data-local':'time-ago'%></p>
+  <% if (@comment.user_id === @user.id || @post.group.user_id === @user.id) %>
+    <div class='mt-2'>
+      <%= link_to 'EDIT', '#' , class: 'inline-block cursor-pointer text-blue-600 hover:text-blue-500 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2' %>
+      <%= link_to 'DELETE', post_comment_path(@comment.post_id, @comment.id), data: { "turbo-method": :delete }, class: 'inline-block cursor-pointer text-red-600 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2' %>
     </div>
-    <% if @comment.replies.any? %>
-      <% @comment.replies.each do |reply| %>
-        <div class='ml-10 mb-3' data-controller='comment'>
-          <div data-comment-target='comment' >
-            <div class="max-w-lg rounded overflow-hidden my-3">
-              <div class="px-6 py-4">
-                <p class="text-gray-700 text-base" data-comment-target='commentContent'><%= reply.content %></p>
-                <p class='text-sm text-gray-600'><strong class='text-black'>Posted: </strong><%= time_tag reply.created_at, 'data-local':'time-ago'%></p>
-              </div>
-            </div>
-            <div class='ml-5'>
-              <% if (@comment.user_id === @user.id || @post.group.user_id === @user.id) %>
-                <div class='mt-2'>
-                  <%= link_to 'EDIT', '#' , data: { action: "comment#edit", turbo: false }, class: 'inline-block cursor-pointer text-blue-600 hover:text-blue-500 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2' %>
-                  <%= link_to 'DELETE', post_comment_path(@comment.post_id, reply.id), data: { "turbo-method": :delete }, class: 'inline-block cursor-pointer text-red-600 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2' %>
-                </div>
-              <% end %>
-            </div>
-          </div>
-          <%= render partial: 'comment/editForm', locals: {comment: reply}%>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-<% end %>
+  <% end %>
+</div>

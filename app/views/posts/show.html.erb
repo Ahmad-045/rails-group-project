@@ -11,22 +11,12 @@
     <div class="max-w-lg shadow-md">
 
       <div class='w-full p-4'>
-        <%= form_with(model: [@post, @post.comments.build]) do |f| %>
-          <div class="mt-2">
-            <%= f.label 'Add a Comment' %>
-            <%= f.text_field :content, autofocus: true, placeholder: 'Add a Comment', class: 'mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1'%>
-          </div>
-
-          <div class="actions mt-5">
-            <%= f.submit "Comment", class: "bg-blue-600 inline-block text-white text-xl rounded p-1 px-2 cursor-pointer" %>
-          </div>
-        <% end %>
+        <%= render 'form', post: @post %>
       </div>
-
     </div>
   </div>
 
-  <div class='mt-5'>
+  <div id="comments" class='mt-5'>
     <%= render(CommentComponent.with_collection(@post_comment, post: @post, user: current_user)) %>
   </div>
 </div>
