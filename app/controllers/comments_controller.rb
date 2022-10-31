@@ -3,11 +3,16 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find_by(id: params[:post_id])
     @comment = @post.comments.new set_comment_params.merge(parent_id: params[:parent_id], user_id: current_user.id)
-    if @comment.save
-      redirect_to request.referer || root_path, notice: 'Successfully Added Comment'
-    else
-      redirect_to request.referer || root_path, alert: 'Erroorrr While creating the posts (check the fields)'
+    respond_to do |format|
+      if @comment.save
+        format.turbo_stream
+        # redirect_to request.referer || root_path, notice: 'Successfully Added Comment'
+      else
+        format.turbo_stream
+        # redirect_to request.referer || root_path, alert: 'Erroorrr While creating the posts (check the fields)'
+      end
     end
+
   end
 
   def destroy

@@ -1,0 +1,3 @@
+<%= turbo_stream.prepend "comments" do %>
+  <%= render(CommentComponent.new(comment: @comment, post: @post, user: current_user)) %>
+<% end %>

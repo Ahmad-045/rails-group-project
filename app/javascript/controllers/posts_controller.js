@@ -2,7 +2,15 @@ import { Controller } from '@hotwired/stimulus';
 
 // Connects to data-controller="posts"
 export default class extends Controller {
-  static targets = ['post', 'editForm', 'listPost'];
+  static targets = [
+    'post',
+    'editForm',
+    'title',
+    'content',
+    'formTitle',
+    'formContent',
+    'postForm',
+  ];
 
   edit(e) {
     e.preventDefault();
@@ -13,12 +21,15 @@ export default class extends Controller {
   }
 
   save(e) {
-    console.log(e);
-    const [data, status, xhr] = e.detail;
-    // console.log(data);
-    // console.log(status);
-    // console.log(xhr);
-    // this.postTarget.classList.remove('hidden');
-    // this.editFormTarget.classList.add('hidden');
+    e.preventDefault();
+    e.stopPropagation();
+
+    this.titleTarget.innerHTML = this.formTitleTarget.value;
+    this.contentTarget.innerHTML = this.formContentTarget.value;
+
+    this.postTarget.classList.remove('hidden');
+    this.editFormTarget.classList.add('hidden');
+
+    this.postFormTarget.submit();
   }
 }
