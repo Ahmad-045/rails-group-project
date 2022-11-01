@@ -23,6 +23,7 @@ class PostsController <  ApplicationController
     @post.user = current_user
 
     if @post.save
+      # PostLifeJob.set(wait: 1.minute).perform_later(@post)
       redirect_to request.referer || root_path, notice: 'Successfully created the new posts'
     else
       redirect_to request.referer || root_path, alert: 'Erroorrr While creating the posts (check the fields)'
