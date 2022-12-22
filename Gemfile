@@ -93,3 +93,6 @@ gem 'figaro'
 gem 'jquery-rails'
 
 gem "pundit", "~> 2.2"
+
+
+gem 'rails-erd', group: :development

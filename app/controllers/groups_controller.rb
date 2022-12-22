@@ -45,7 +45,6 @@ class GroupsController < ApplicationController
     @created_by_me = Group.where('user_id = ?', current_user.id)
   end
 
-
   private
 
   def set_group_params
